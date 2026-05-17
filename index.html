@@ -1,617 +1,659 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Shivam yadav Portfolio</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shivam Yadav — Software Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="css/animate.css">
-    
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
+    :root {
+      --accent: #ffbd39;
+      --accent-dark: #e6a520;
+      --dark: #0e0e0e;
+      --dark-2: #181818;
+      --dark-3: #222;
+      --light: #f5f4f0;
+      --muted: #888;
+      --text: #e8e8e4;
+      --text-dim: #aaa;
+      --border: rgba(255,255,255,0.08);
+      --radius: 16px;
+    }
 
-    <link rel="stylesheet" href="css/aos.css">
+    html { scroll-behavior: smooth; }
 
-    <link rel="stylesheet" href="css/ionicons.min.css">
-    
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/icomoon.css">
-    <link rel="stylesheet" href="css/style.css">
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
 
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 68px;
+      background: rgba(14,14,14,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 14px; font-weight: 500; color: var(--text-dim);
+      text-decoration: none; letter-spacing: 0.3px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
 
+    /* hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
+    .mobile-menu {
+      display: none; position: fixed; top: 68px; left: 0; right: 0; z-index: 99;
+      background: var(--dark-2); border-bottom: 1px solid var(--border);
+      padding: 24px 5%; flex-direction: column; gap: 20px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 16px; color: var(--text-dim); text-decoration: none; }
+    .mobile-menu a:hover { color: var(--accent); }
 
-<style>
+    /* ── HERO ── */
+    #home {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 0 5%;
+      padding-top: 68px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; pointer-events: none;
+    }
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.18;
+    }
+    .blob-1 { width: 400px; height: 400px; background: var(--accent); top: -80px; right: 380px; }
+    .blob-2 { width: 280px; height: 280px; background: #7c6ef9; bottom: 50px; left: 5%; }
 
-/*======================================
-//--//-->   ABOUT
-======================================*/
+    /* hero two-column layout */
+    .hero-layout {
+      position: relative; z-index: 1;
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; gap: 60px;
+    }
+    .hero-inner { flex: 1; max-width: 600px; }
 
-.about-mf .box-shadow-full {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-}
+    /* hero image – circular */
+    .hero-image-wrap {
+      flex-shrink: 0;
+      width: 320px; height: 320px;
+      position: relative;
+    }
+    /* spinning dashed ring */
+    .hero-image-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 3px dashed rgba(255,189,57,0.45);
+      animation: spin-ring 18s linear infinite;
+      z-index: 0;
+    }
+    /* solid accent ring */
+    .hero-image-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
+      z-index: 0;
+    }
+    @keyframes spin-ring { to { transform: rotate(360deg); } }
 
-.about-mf .about-img {
-  margin-bottom: 2rem;
-}
+    .hero-image-wrap img {
+      position: relative; z-index: 1;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top center;
+      border-radius: 50%;
+      display: block;
+      border: 4px solid var(--dark);
+    }
 
-.about-mf .about-img img {
-  margin-left: 10px;
-}
+    /* ── MOBILE: image first, then text ── */
+    @media (max-width: 900px) {
+      .hero-layout {
+        flex-direction: column-reverse;
+        align-items: center;
+        text-align: center;
+        gap: 36px;
+        padding-top: 20px;
+      }
+      .hero-inner { max-width: 100%; }
+      .hero-image-wrap {
+        width: 220px; height: 220px;
+      }
+      .hero-desc { max-width: 100%; margin-left: auto; margin-right: auto; }
+      .hero-btns { justify-content: center; }
+      .hero-tag { justify-content: center; }
+    }
 
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,189,57,0.12); border: 1px solid rgba(255,189,57,0.3);
+      color: var(--accent); font-size: 13px; font-weight: 500;
+      padding: 6px 14px; border-radius: 999px; margin-bottom: 28px;
+      letter-spacing: 0.5px;
+    }
+    .hero-tag::before { content: '●'; font-size: 8px; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-.skill-mf .progress {
-  /* background-color: #cde1f8; */
-  margin: .5rem 0 1.2rem 0;
-  border-radius: 0;
-  height: .7rem;
-}
+    .hero-name {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(40px, 6vw, 76px);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -3px;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .hero-name span { color: var(--accent); }
+    .hero-role {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(20px, 3vw, 32px);
+      font-weight: 600;
+      color: var(--text-dim);
+      letter-spacing: -0.5px;
+      margin-bottom: 24px;
+    }
+    .hero-role span { color: var(--accent); }
+    #typed { border-right: 2px solid var(--accent); padding-right: 3px; animation: blink 0.75s step-end infinite; }
+    @keyframes blink { 50% { border-color: transparent; } }
 
-.skill-mf .progress .progress-bar {
-  height: .7rem;
-  background-color: #ffbd39;
-}
+    .hero-desc {
+      font-size: 17px; color: var(--text-dim); max-width: 500px;
+      margin-bottom: 40px; line-height: 1.7;
+    }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--accent); color: #0e0e0e;
+      font-weight: 600; font-size: 14px;
+      padding: 14px 28px; border-radius: 999px;
+      text-decoration: none; transition: all 0.2s;
+      letter-spacing: 0.2px;
+    }
+    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent; color: var(--text);
+      font-weight: 500; font-size: 14px;
+      padding: 13px 28px; border-radius: 999px;
+      text-decoration: none; transition: all 0.2s;
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
+    /* ── SECTION BASE ── */
+    section { padding: 100px 5%; }
+    .section-label {
+      font-size: 12px; font-weight: 600; letter-spacing: 2px;
+      color: var(--accent); text-transform: uppercase; margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 800; letter-spacing: -1.5px;
+      color: #fff; line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .divider {
+      width: 48px; height: 3px; background: var(--accent);
+      border-radius: 2px; margin-bottom: 48px;
+    }
 
-/* Animation styles */
-#typing-animation {
-  position: relative;
-  font-size: 30px;
-  font-weight: bold;
-  color: rgb(255, 255, 255);
-  overflow: hidden;
-  white-space: nowrap;
-  animation: typing 3s steps(20, end) infinite;
-}
+    /* ── ABOUT ── */
+    #about { background: var(--dark-2); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+    }
+    .about-text p { color: var(--text-dim); font-size: 16px; margin-bottom: 20px; line-height: 1.8; }
+    .info-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 32px 0;
+    }
+    .info-item { padding: 14px 16px; background: var(--dark-3); border-radius: 10px; border: 1px solid var(--border); }
+    .info-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+    .info-value { font-size: 14px; color: var(--text); font-weight: 500; }
 
-#typing-animation:before {
-  content: "";
-  /* position: absolute; */
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background-color: #ccc;
-  animation: typing-cursor 0.5s ease-in-out infinite;
-}
+    .skills-side .skill-row { margin-bottom: 20px; }
+    .skill-top { display: flex; justify-content: space-between; margin-bottom: 8px; }
+    .skill-name { font-size: 14px; font-weight: 500; color: var(--text); }
+    .skill-pct { font-size: 13px; color: var(--accent); font-weight: 600; }
+    .skill-bar { height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
+    .skill-fill {
+      height: 100%; background: var(--accent); border-radius: 3px;
+      width: 0; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
+    /* ── RESUME ── */
+    #resume { }
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .edu-card {
+      padding: 28px; background: var(--dark-2); border-radius: var(--radius);
+      border: 1px solid var(--border); position: relative; overflow: hidden;
+    }
+    .edu-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 3px; height: 100%; background: var(--accent);
+    }
+    .edu-date {
+      font-size: 12px; color: var(--accent); font-weight: 600;
+      letter-spacing: 0.5px; margin-bottom: 10px;
+    }
+    .edu-degree {
+      font-family: 'Syne', sans-serif;
+      font-size: 18px; font-weight: 700; color: #fff;
+      margin-bottom: 6px; line-height: 1.3;
+    }
+    .edu-school { font-size: 14px; color: var(--text-dim); }
 
-@keyframes typing-cursor {
-  from {
-    width: 5px;
-  }
-  to {
-    width: 0;
-  }
-}
+    /* ── PROJECTS ── */
+    #projects { background: var(--dark-2); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .proj-card {
+      background: var(--dark-3); border-radius: var(--radius);
+      border: 1px solid var(--border); overflow: hidden;
+      transition: transform 0.25s, border-color 0.25s;
+    }
+    .proj-card:hover { transform: translateY(-6px); border-color: rgba(255,189,57,0.35); }
+    .proj-thumb {
+      height: 180px; background: var(--dark-2);
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    .proj-thumb img { transition: transform 0.4s ease; }
+    .proj-card:hover .proj-thumb img { transform: scale(1.06); }
+    .proj-body { padding: 24px; }
+    .proj-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .proj-tag {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.5px;
+      padding: 3px 10px; border-radius: 999px;
+      background: rgba(255,189,57,0.1); color: var(--accent);
+      border: 1px solid rgba(255,189,57,0.2);
+    }
+    .proj-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 18px; font-weight: 700; color: #fff;
+      margin-bottom: 10px; text-decoration: none; display: block;
+    }
+    .proj-title:hover { color: var(--accent); }
+    .proj-desc { font-size: 14px; color: var(--text-dim); line-height: 1.6; margin-bottom: 20px; }
+    .proj-link {
+      font-size: 13px; font-weight: 600; color: var(--accent);
+      text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+      transition: gap 0.2s;
+    }
+    .proj-link:hover { gap: 10px; }
 
+    /* ── GITHUB CTA ── */
+    .github-cta {
+      margin-top: 48px; text-align: center;
+      padding: 40px; background: var(--dark-3);
+      border-radius: var(--radius); border: 1px solid var(--border);
+    }
+    .github-cta h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 8px;
+    }
+    .github-cta p { color: var(--text-dim); margin-bottom: 24px; font-size: 15px; }
 
-/* project image zoom effect */
+    /* ── CONTACT ── */
+    #contact { }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    .contact-card {
+      padding: 28px; background: var(--dark-2); border-radius: var(--radius);
+      border: 1px solid var(--border); text-align: center;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .contact-card:hover { border-color: rgba(255,189,57,0.3); transform: translateY(-4px); }
+    .contact-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: rgba(255,189,57,0.1); border: 1px solid rgba(255,189,57,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; margin: 0 auto 16px;
+    }
+    .contact-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    .contact-value { font-size: 15px; color: var(--text); font-weight: 500; }
+    .contact-value a { color: var(--text); text-decoration: none; }
+    .contact-value a:hover { color: var(--accent); }
 
-.zoom-effect {
-  overflow: hidden;
-  transition: transform 0.3s ease-out;
-}
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 5%; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    footer p { font-size: 13px; color: var(--muted); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
 
-.zoom-effect:hover {
-  transform: scale(1.1);
-}
+    /* ── REVEAL ANIMATION ── */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
 
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .edu-grid { grid-template-columns: 1fr; }
+      .info-grid { grid-template-columns: 1fr; }
+      section { padding: 70px 5%; }
+    }
+  </style>
+</head>
+<body>
 
-</style>
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#home">SY.</a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" aria-label="Menu" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="toggleMenu()">Home</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#resume" onclick="toggleMenu()">Resume</a>
+  <a href="#projects" onclick="toggleMenu()">Projects</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
 
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg">
+    <div class="hero-blob blob-1"></div>
+    <div class="hero-blob blob-2"></div>
+  </div>
+  <div class="hero-layout">
+    <div class="hero-inner">
+      <div class="hero-tag">Available for opportunities</div>
+      <h1 class="hero-name">Shivam<br><span>Yadav.</span></h1>
+      <div class="hero-role"><span id="typed"></span></div>
+      <p class="hero-desc">
+        Passionate about building user-friendly web applications that look beautiful and perform well. Skilled in the MERN stack with a love for clean, efficient code.
+      </p>
+      <div class="hero-btns">
+        <a href="https://www.linkedin.com/in/shivam-yadav-d9" class="btn-primary" target="_blank">LinkedIn ↗</a>
+        <a href="https://github.com/shivam-yadav-d9" class="btn-outline" target="_blank">GitHub</a>
+      </div>
+    </div>
+    <!-- Profile image — circular, desktop right / mobile top -->
+    <div class="hero-image-wrap">
+      <img src="images/about-me.png" alt="Shivam Yadav">
+    </div>
+  </div>
+</section>
 
-  </head>
-  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-	  
-	  
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
-	    <div class="container">
-	      <a class="navbar-brand" href="index.html">Shivam Yadav</a>
-	      <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="oi oi-menu"></span> Menu
-	      </button>
-
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav nav ml-auto">
-	          <li class="nav-item"><a href="#home-section" class="nav-link"><span>Home</span></a></li>
-	          <li class="nav-item"><a href="#about-section" class="nav-link"><span>About</span></a></li>
-	          <li class="nav-item"><a href="#resume-section" class="nav-link"><span>Resume</span></a></li>
-	          <li class="nav-item"><a href="#project-section" class="nav-link"><span>Projects</span></a></li>
-	          <li class="nav-item"><a href="#contact-section" class="nav-link"><span>Contact</span></a></li>
-	        </ul>
-	      </div>
-	    </div>
-	  </nav>
-	  <section id="home-section" class="hero">
-		  <div class="home-slider  owl-carousel">
-	       <div class="slider-item ">
-	      	<div class="overlay"></div>
-	         <div class="container">
-	          <div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end" data-scrollax-parent="true">
-	          	<div class="one-third js-fullheight order-md-last img" style="background-image:url(images/bg_1.png);">
-	          	 <div class="overlay"></div>
-	          	</div>
-		          <div class="one-forth d-flex  align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-		          	<div class="text">
-		          		<span class="subheading">Hello!</span>
-			            <h1 class="mb-4 mt-3">I'm <span>Shivam Yadav</span></h1>
-
-						<!-- Element to contain animated typing -->
-						<span id="typing-animation"></span>
-
-						<script>
-
-						// Initialize the typing animation
-						const typingAnimationElement = document.getElementById('typing-animation');
-
-						// Create an array of typing text
-						const typingTexts = [
-						'Web Developer  ',
-						];
-
-						// Create a function to display the typing animation for a given text
-						function playTypingAnimation(text) {
-						// Loop through each character and add it to the element
-						for (let i = 0; i < text.length; i++) {
-							setTimeout(() => {
-							typingAnimationElement.textContent += text[i];
-							}, i * 200); // Increase the delay to slow down the typing animation
-						}
-
-						// Once the animation is complete, reset the text and start over
-						setTimeout(() => {
-							typingAnimationElement.textContent = '';
-							playTypingAnimation(typingTexts[(typingTexts.indexOf(text) + 1) % typingTexts.length]);
-						}, text.length * 200);
-						}
-
-						// Start the typing animation loop
-						playTypingAnimation(typingTexts[0]);
-
-						</script>
-
-						<br>
-						<br>
-			            <h2>Hi, I’m Shivam Yadav a passionate web developer. Building user-friendly websites that look beautiful and perform well is my forte. </h2>
-						<!-- <h2 class="d-flex" style="margin-bottom: 0">With over 5 years of experience</h2> -->
-						<!-- <br> -->
-			            <p><a href="https://www.linkedin.com/in/shivam-yadav-d9" class="btn btn-primary py-3 px-3">LinkedIn</a>
-						<a href="https://github.com/shivam-yadav-d9" class="btn btn-white btn-outline-white py-3 px-4">My works</a></p>
-		            </div>
-		          </div>
-	        	</div>
-	        </div>
-	      </div>
-		</div>
-    </section>
-
-
-
-    <section class="ftco-about img ftco-section ftco-no-pb" id="about-section">
-    	<div class="container">
-			<div class="row">
-				<div class="row d-flex align-items-stretch">
-				<!-- <div class="row d-flex"> -->
-					<div class="col-md-6 col-lg-5 d-flex">
-						<div class="img-about img d-flex align-items-stretch">
-							<div class="overlay">
-								<div class="row">
-									<div class="col-sm-6 col-md-5">
-									  <div class="about-img">
-										<img src="images/about-me.png" class="img-fluid rounded b-shadow-a" alt="">
-									  </div>
-									</div>
-									<!-- Details next to profile image -->
-									<div class="col-sm-6 col-md-7">
-									  <div class="about-info">
-										<p><span class="title-s">Name: </span> <span>Shivam Yadav</span></p>
-										<p><span class="title-s">Course: </span> <span>BCA 3rd year student </span></p>
-										<!-- <p><span class="title-s">Experience: </span> <span>5 Years 3 Months</span></p> -->
-										<p><span class="title-s">Address: </span> <span>Uttar Pradesh,Indian</span></p>
-									  </div>
-									</div>
-								  </div>
-
-								<div class="skill-mf">
-									<p class="title-s">Skills</p>
-									<span>JavaScript</span> <span class="pull-right">92%</span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 92%;" aria-valuenow="95" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-									
-									<span>React.js</span> <span class="pull-right">85%</span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-									
-									<span>MongoDB</span> <span class="pull-right">90%</span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-									
-									<span>Node.js</span> <span class="pull-right">85%</span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-									
-									<span>SQL</span> <span class="pull-right">75%</span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-md-6 col-lg-7 pl-lg-5 pb-5">
-						<div class="row justify-content-start pb-3">
-							<div class="col-md-12 heading-section ftco-animate">
-								
-								<h1 class="big">About</h1>
-								<h2 class="mb-4">About Me</h2>
-								
-								<p>
-								Welcome to my profile! I am a student of BCA 3nd year at Maharana Pratap College Of Professional Studies.Very much curious about new technology and computer languages .I'm always on the lookout for learning opportunities and give my best to whatever I do.I enjoy Volleyball and music.</p>
-								<ul class="about-info mt-4 px-md-0 px-2">
-									<li class="d-flex"><span>Profile:</span> <span>Web Developer</span></li>
-									<!-- <li class="d-flex"><span>Domain:</span> <span>Retail, Ecommerce, BFSI &amp; Digital Marketing</span></li> -->
-									<li class="d-flex"><span>Education:</span> <span> Bachelor of Computer Applications</span></li>
-									<li class="d-flex"><span>Language:</span> <span>English, Hindi</span></li>
-									<!-- <li class="d-flex"><span>BI Tools:</span> <span>Microsoft Power BI, Looker &amp; Tableau</span></li> -->
-									<!-- <li class="d-flex"><span>Other Skills:</span> <span>Cloud, PySpark, Excel, Git, JIRA, Google Analytics &amp; SEO</span></li> -->
-									<li class="d-flex"><span>Interest:</span> <span>Volleyball , Online Gaming </span></li>
-									
-								</ul>
-							</div>
-						</div>
-
-
-						<div class="counter-wrap ftco-animate d-flex mt-md-3">
-							<div class="text">
-								<p class="mb-4">
-									<span class="number" data-number="4">0</span> <span>+</span>
-									<span>&nbsp; Projects completed</span>
-								</p>
-								<p><a href="https://www.linkedin.com/in/shivam-yadav-d9" class="btn btn-primary py-3 px-3">LinkedIn</a></p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-    </section>
-    <section class="ftco-section ftco-no-pb" id="resume-section">
-    	<!-- <div class="container">
-    		<div class="row justify-content-center pb-5">
-          <div class="col-md-10 heading-section text-center ftco-animate">
-          	<h1 class="big big-2">Resume</h1>
-            <h2 class="mb-4">Resume</h2>
-            <p>Seasoned Senior Data Analyst with 5+ years of experience driving business strategies through data-driven insights. Proven expertise in data science, statistical analysis, machine learning algorithms and project management.</p>
-          </div>
-        </div> -->
-		<!-- <div class="row">
-			<h1 class="big-4">Experience</h1>
-			<div class="underline"></div>
-		</div>
-		<br>
-		
-		<div class="row">
-				<div class="col-md-6">
-					<div class="resume-wrap ftco-animate">
-						<span class="date">2021-Present</span>
-						<h2>Senior Data Analyst</h2>
-						<span class="position">Merkle</span>
-						<p class="mt-4">Merkle, a leading CXM and media company with over 10K+ professionals globally. It's a part of Dentsu International. 
-							<ul>
-								<li>Analysed ad campaigns, clickstream, and customer surveys data, identified an increasing demand and launched a strategic product line.</li>
-								<li>Developed time series forecasting models to predict sales and optimize marketing budgets, got model performance of 92%.</li>
-								<li>Designed and executed A/B tests, performed rigorous statistical analysis. Led to 20% MoM increase in the conversion rate.</li>
-							</ul>
-						</p>
-					</div>
-
-				</div>
-
-				<div class="col-md-6">
-					<div class="resume-wrap ftco-animate">
-						<span class="date">2018-2021</span>
-						<h2>Senior Data Analyst</h2>
-						<span class="position">iQuanti</span>
-						<p class="mt-4">iQuanti is a data-driven digital marketing analytics and solutions company, helps top 100 global brands. 
-							<ul>
-								<li>Performed in-depth market research and analysis to create online pages. Resulted in ~100% website growth and 30% increase in conversion rate YoY.</li>
-								<li>Delivered multiple training and mentorship sessions on analytical tools like SQL, MS Excel, Power BI, Tableau and Python.</li>
-								<li>Performed migration and enhancements for merchandising dashboard, involved data integration and its feature improvement.</li>
-							</ul>
-						</p>
-					</div>
-
-				</div>
-			</div>
-
-		<br>
-		<br> -->
-		<div class="row">
-			<h1 class="big-4">Education</h1>
-			<div class="underline"></div>
-		</div>
-		<br>
-			<div class="row">
-    			<div class="col-md-6">
-    				<div class="resume-wrap ftco-animate">
-    					<span class="date">Pursuing 2022-2025 </span>
-    					<h2>Bachelor of Computer Applications</h2>
-    					<span class="position">Maharana Pratap College Of Professional Studies</span>
-    					<!-- <p class="mt-4">Grade: First class distinction.</p> -->
-    				</div>
-    			</div>
-    			<div class="col-md-6">
-    				<div class="resume-wrap ftco-animate">
-    					<span class="date">2021-2022</span>
-    					<h2>Higher Secondary School</h2>
-    					<span class="position"> SRI KRISHNA INTER College USMANPUR PIPRIDIH MAU</span>
-    					<!-- <p class="mt-4">Grade: First class distinction.</p> -->
-    				</div>
-				</div>
-    		</div>
-    		<div class="row justify-content-center mt-5">
-    			<div class="col-md-6 text-center ftco-animate">
-    				<!-- <p><a href="#" class="btn btn-primary py-4 px-5">Download CV</a></p> -->
-    			</div>
-    		</div>
-    	</div>
-    </section>
-    <section class="ftco-section" id="project-section">
-      <div class="container">
-        <div class="row justify-content-center mb-5 pb-5">
-          <div class="col-md-7 heading-section text-center ftco-animate">
-            <h1 class="big big-2">Projects</h1>
-            <h2 class="mb-4">Projects</h2>
-            <p>Below are the sample Web Development projects on FRONTEND, BACKEND</p>
-          </div>
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">Who I am</div>
+  <h2 class="section-title">About Me</h2>
+  <div class="divider"></div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>I'm a BCA 3rd year student at Maharana Pratap College Of Professional Studies — always curious about new technologies and programming languages. I give my best to everything I do.</p>
+      <p>When I'm not coding, you'll find me playing Volleyball or exploring new music. I believe great software is built with both logic and creativity.</p>
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="info-label">Name</div>
+          <div class="info-value">Shivam Yadav</div>
         </div>
-        <div class="row d-flex">
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry justify-content-end">
-              <a href="https://github.com/rishabhnmishra/SQL_Music_Store_Analysis/blob/main/Music_Store_Query.sql" class="block-20 zoom-effect" style="background-image: url('images/proj_1.png');">
-              </a>
-              <div class="text mt-3 float-right d-block">
-
-                <h3 class="heading"><a href="https://github.com/shivam-yadav-d9/Cryptocurrency-Website.git">Cryptocurrency-Website</a></h3>
-                <p>On this website we will display the live price of the cryptocurrency with free api, we will display the price of cryptocurrency with the help of JavaScript and jQuery.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry justify-content-end">
-              <a href="https://github.com/rishabhnmishra/Python_Diwali_Sales_Analysis/blob/main/Diwali_Sales_Analysis.ipynb" class="block-20 zoom-effect" style="background-image: url('images/proj_2.jpg');">
-              </a>
-              <div class="text mt-3 float-right d-block">
-
-                <h3 class="heading"><a href="https://github.com/shivam-yadav-d9/Web-Development-Course.git">Web-Development-Course</a></h3>
-                <p>Web Development & Design Course for Maharana Pratap College Of Professional studies, using HTML CSS JAVASCRIPT.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry">
-              <a href="https://github.com/rishabhnmishra/Madhav_Store_Analysis_PowerBI/blob/main/Madhav%20Store%20dashboard.jpg" class="block-20 zoom-effect" style="background-image: url('images/proj_3.jpg');">
-              </a>
-              <div class="text mt-3 float-right d-block">
-
-                <h3 class="heading"><a href="https://github.com/shivam-yadav-d9/AMAZON-Clone.git">AMAZON-Clone</a></h3>
-                <p>Simple Amazon clone by using HTML CSS.</p>
-              </div>
-            </div>
-          </div>
+        <div class="info-item">
+          <div class="info-label">Degree</div>
+          <div class="info-value">BCA (Pursuing)</div>
         </div>
-	<br>
-		<!-- added justify-content-center to center align the last two projects -->
-		<!-- <div class="row d-flex justify-content-center">  
-			<div class="col-md-4 d-flex ftco-animate">
-				<div class="blog-entry justify-content-end">
-				<a href="https://github.com/rishabhnmishra/sales_forecasting/tree/main" class="block-20 zoom-effect" style="background-image: url('images/proj_4.jpg');">
-				</a>
-				<div class="text mt-3 float-right d-block">
-  
-				  <h3 class="heading"><a href="https://github.com/rishabhnmishra/sales_forecasting/tree/main">Sales Forecast- Time Series Forecasting</a></h3>
-				  <p>Used multiple machine learning models to forecast sales (retail store) and performed time series analysis.</p>
-				</div>
-			  </div>
-			</div>
-			<div class="col-md-4 d-flex ftco-animate">
-				<div class="blog-entry justify-content-end">
-				<a href="https://github.com/rishabhnmishra/customer_segmentation/blob/main/Customer_Segmentation-final.ipynb" class="block-20 zoom-effect" style="background-image: url('images/proj_5.jpg');">
-				</a>
-				<div class="text mt-3 float-right d-block">
-  
-				  <h3 class="heading"><a href="https://github.com/rishabhnmishra/customer_segmentation/blob/main/Customer_Segmentation-final.ipynb">Customer Segmentation using clustering model</a></h3>
-				  <p>Developed a ML model to give various recommendations of financial products &amp; services on target customer groups.</p>
-				</div>
-			  </div>
-			</div>
-		 </div> -->
-	  </div>
-    </section>
-
-	<section class="ftco-section ftco-no-pt ftco-no-pb ftco-counter img" id="section-counter">
-      <!-- <div class="container">
-		<div class="row d-md-flex align-items-center">
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text">
-                <strong class="number" data-number="20">0</strong>
-                <span>Achievements</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text">
-                <strong class="number" data-number="30">0</strong>
-                <span>Projects</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text">
-                <strong class="number" data-number="1000">0</strong>
-                <span>Mentored Students</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text">
-                <strong class="number" data-number="500">0</strong>
-                <span>Cups of coffee</span>
-              </div>
-            </div>
-          </div>
+        <div class="info-item">
+          <div class="info-label">Location</div>
+          <div class="info-value">Uttar Pradesh, India</div>
         </div>
-      </div> -->
-	
-	  <div class="ftco-section ftco-hireme img margin-top" style="background-image: url(images/bg_1.jpg)">
-			<!-- <div class="container"> -->
-				<div class="row justify-content-center">
-					<div class="col-md-7 ftco-animate text-center">
-						<h2>More projects on<span> Github  </span> </h2>
-						<!-- <div class="heading"> <h4> I love to solve business problems &amp; uncover hidden data stories </h4> -->
-						<!-- <br> -->
-						<p><a href="https://github.com/shivam-yadav-d9" class="btn btn-primary py-3 px-5">GitHub</a></p>
-						</div>
-					</div>
-				</div>
-			<!-- </div> -->
-		</div>
-	</section>
-
-
-
-    <section class="ftco-section contact-section ftco-no-pb" id="contact-section">
-      <div class="container">
-      	<div class="row justify-content-center mb-5 pb-3">
-          <div class="col-md-7 heading-section text-center ftco-animate">
-            <h1 class="big big-2">Contact</h1>
-            <h2 class="mb-4">Contact Me</h2>
-            <p>Below are the details to reach out to me!</p>
-          </div>
+        <div class="info-item">
+          <div class="info-label">Languages</div>
+          <div class="info-value">English, Hindi</div>
         </div>
+        <div class="info-item">
+          <div class="info-label">Profile</div>
+          <div class="info-value">Web Developer</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Projects</div>
+          <div class="info-value">4+ Completed</div>
+        </div>
+      </div>
+      <a href="https://www.linkedin.com/in/shivam-yadav-d9" class="btn-primary" target="_blank" style="display:inline-block;">Connect on LinkedIn ↗</a>
+    </div>
 
-        <div class="row d-flex contact-info mb-5">
-          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-map-signs"></span>
-          		</div>
-          		<h3 class="mb-4">Address</h3>
-	            <p>Uttar Pradesh, India</p>
-	          </div>
-          </div>
-          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-phone2"></span>
-          		</div>
-          		<h3 class="mb-4">Contact Number</h3>
-	            <p><a href="tel://0101010101">+9554095172</a></p>
-	          </div>
-          </div>
-          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-paper-plane"></span>
-          		</div>
-          		<h3 class="mb-4">Email Address</h3>
-	            <p><a href="mailto:info@yoursite.com">shivammpcps@gmail.com</a></p>
-	          </div>
-          </div>
-          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-globe"></span>
-          		</div>
-          		<h3 class="mb-4">Download Resume</h3>
-	            <p><a href="#">resumelink</a></p>
-	          </div>
-          </div>
-<!-- 
-		  <div class="container">
-			<br>
-			<br>
-			<!-- <div class="row justify-content-center">
-				<div class="col-md-7 ftco-animate text-center">
-					<h2>Have a<span> Question?  </span> <a href="https://forms.gle/uLaTShUKXraAvHJ77" class="btn btn-primary py-3 px-5">Click Here</a> </h2>
-				</div>
-			</div> -->
-				<!-- <br>
-					<ul class="ftco-footer-social list-unstyled d-flex justify-content-center align-items-center mb-0">
-					  <li class="ftco-animate normal-txt">Find me on  </li>
-					  <li class="ftco-animate"><a href="https://www.youtube.com/@RishabhMishraOfficial"><span class="icon-youtube"></span></a></li>
-					  <li class="ftco-animate"><a href="https://www.linkedin.com/in/rishabhnmishra/"><span class="icon-linkedin"></span></a></li>  
-					  <li class="ftco-animate"><a href="https://twitter.com/rishabhnmishra"><span class="icon-twitter"></span></a></li>
-					  <li class="ftco-animate"><a href="https://twitter.com/rishabhnmishra"><span class="icon-facebook"></span></a></li>
-				      <li class="ftco-animate"><a href="https://www.instagram.com/rishabhnmishra/"><span class="icon-instagram"></span></a></li>
-					</ul>
-				<br>
-		   </div> --> 
-   </div>
- </section>
+    <div class="skills-side reveal">
+      <div class="section-label" style="margin-bottom:24px;">Technical Skills</div>
 
+      <div class="skill-row">
+        <div class="skill-top"><span class="skill-name">JavaScript</span><span class="skill-pct">92%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="92%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-top"><span class="skill-name">React.js</span><span class="skill-pct">85%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="85%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-top"><span class="skill-name">MongoDB</span><span class="skill-pct">90%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="90%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-top"><span class="skill-name">Node.js</span><span class="skill-pct">85%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="85%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-top"><span class="skill-name">SQL</span><span class="skill-pct">75%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="75%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-top"><span class="skill-name">HTML / CSS</span><span class="skill-pct">95%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="95%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
- 
-	
-    <footer class="ftco-footer ftco-section">
-		<div class="container">
-		  <div class="row">
-			<div class="col-md-12 text-center">
-  
-			  <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-	<!-- Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> -->
-	<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-			</div>
-		  </div>
-		</div>
-	  </footer>
+<!-- RESUME -->
+<section id="resume">
+  <div class="section-label">Background</div>
+  <h2 class="section-title">Education</h2>
+  <div class="divider"></div>
+  <div class="edu-grid">
+    <div class="edu-card reveal">
+      <div class="edu-date">2022 – 2025 (Pursuing)</div>
+      <div class="edu-degree">Bachelor of Computer Applications</div>
+      <div class="edu-school">Maharana Pratap College Of Professional Studies</div>
+    </div>
+    <div class="edu-card reveal">
+      <div class="edu-date">2021 – 2022</div>
+      <div class="edu-degree">Higher Secondary School</div>
+      <div class="edu-school">Sri Krishna Inter College, Usmanpur Pipridih, Mau</div>
+    </div>
+  </div>
+</section>
 
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">My work</div>
+  <h2 class="section-title">Projects</h2>
+  <div class="divider"></div>
+  <div class="projects-grid">
 
-  <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+    <div class="proj-card reveal">
+      <div class="proj-thumb">
+        <img src="images/proj_1.png" alt="Cryptocurrency Website" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          <span class="proj-tag">JavaScript</span>
+          <span class="proj-tag">jQuery</span>
+          <span class="proj-tag">API</span>
+        </div>
+        <a href="https://github.com/shivam-yadav-d9/Cryptocurrency-Website.git" class="proj-title" target="_blank">Cryptocurrency Website</a>
+        <p class="proj-desc">Live cryptocurrency price tracker using free APIs. Built with JavaScript and jQuery to display real-time market data.</p>
+        <a href="https://github.com/shivam-yadav-d9/Cryptocurrency-Website.git" class="proj-link" target="_blank">View on GitHub →</a>
+      </div>
+    </div>
 
+    <div class="proj-card reveal">
+      <div class="proj-thumb">
+        <img src="images/proj_2.jpg" alt="Web Development Course" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          <span class="proj-tag">HTML</span>
+          <span class="proj-tag">CSS</span>
+          <span class="proj-tag">JavaScript</span>
+        </div>
+        <a href="https://github.com/shivam-yadav-d9/Web-Development-Course.git" class="proj-title" target="_blank">Web Development Course</a>
+        <p class="proj-desc">A complete web development and design course built for Maharana Pratap College — structured learning with practical examples.</p>
+        <a href="https://github.com/shivam-yadav-d9/Web-Development-Course.git" class="proj-link" target="_blank">View on GitHub →</a>
+      </div>
+    </div>
 
-  <script src="js/jquery.min.js"></script>
-  <script src="js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.easing.1.3.js"></script>
-  <script src="js/jquery.waypoints.min.js"></script>
-  <script src="js/jquery.stellar.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.magnific-popup.min.js"></script>
-  <script src="js/aos.js"></script>
-  <script src="js/jquery.animateNumber.min.js"></script>
-  <script src="js/scrollax.min.js"></script>
-  
-  <script src="js/main.js"></script>
-    
-  </body>
+    <div class="proj-card reveal">
+      <div class="proj-thumb">
+        <img src="images/proj_3.jpg" alt="Amazon Clone" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          <span class="proj-tag">HTML</span>
+          <span class="proj-tag">CSS</span>
+          <span class="proj-tag">Clone</span>
+        </div>
+        <a href="https://github.com/shivam-yadav-d9/AMAZON-Clone.git" class="proj-title" target="_blank">Amazon Clone</a>
+        <p class="proj-desc">A pixel-perfect Amazon UI clone demonstrating strong front-end fundamentals with semantic HTML and responsive CSS layouts.</p>
+        <a href="https://github.com/shivam-yadav-d9/AMAZON-Clone.git" class="proj-link" target="_blank">View on GitHub →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="github-cta reveal">
+    <h3>More projects on GitHub</h3>
+    <p>Explore all my repositories — from experiments to full projects.</p>
+    <a href="https://github.com/shivam-yadav-d9" class="btn-primary" target="_blank">Visit GitHub ↗</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Get in touch</div>
+  <h2 class="section-title">Contact Me</h2>
+  <div class="divider"></div>
+  <div class="contact-grid">
+    <div class="contact-card reveal">
+      <div class="contact-icon">📍</div>
+      <div class="contact-label">Address</div>
+      <div class="contact-value">Uttar Pradesh, India</div>
+    </div>
+    <div class="contact-card reveal">
+      <div class="contact-icon">📞</div>
+      <div class="contact-label">Phone</div>
+      <div class="contact-value"><a href="tel:+9554095172">+91 9554095172</a></div>
+    </div>
+    <div class="contact-card reveal">
+      <div class="contact-icon">✉️</div>
+      <div class="contact-label">Email</div>
+      <div class="contact-value"><a href="mailto:shivammpcps@gmail.com">shivammpcps@gmail.com</a></div>
+    </div>
+    <div class="contact-card reveal">
+      <div class="contact-icon">💼</div>
+      <div class="contact-label">LinkedIn</div>
+      <div class="contact-value"><a href="https://www.linkedin.com/in/shivam-yadav-d9" target="_blank">shivam-yadav-d9</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Shivam Yadav. Built with care.</p>
+  <div class="footer-links">
+    <a href="https://github.com/shivam-yadav-d9" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/shivam-yadav-d9" target="_blank">LinkedIn</a>
+    <a href="mailto:shivammpcps@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script>
+  // Typing animation — "Software Engineer" only
+  const typed = document.getElementById('typed');
+  const word = 'Software Engineer';
+  let i = 0, deleting = false;
+
+  function type() {
+    if (!deleting) {
+      typed.textContent = word.slice(0, i + 1);
+      i++;
+      if (i === word.length) { deleting = true; setTimeout(type, 2200); return; }
+      setTimeout(type, 120);
+    } else {
+      typed.textContent = word.slice(0, i - 1);
+      i--;
+      if (i === 0) { deleting = false; setTimeout(type, 500); return; }
+      setTimeout(type, 60);
+    }
+  }
+  type();
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Skill bars on scroll
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.skill-fill').forEach(bar => {
+          bar.style.width = bar.dataset.width;
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  const skillSection = document.querySelector('.skills-side');
+  if (skillSection) skillObserver.observe(skillSection);
+</script>
+</body>
 </html>
