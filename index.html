@@ -322,23 +322,97 @@
 
     /* ── CONTACT ── */
     #contact { }
-    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .contact-info-col { display: flex; flex-direction: column; gap: 16px; }
     .contact-card {
-      padding: 28px; background: var(--dark-2); border-radius: var(--radius);
-      border: 1px solid var(--border); text-align: center;
+      padding: 20px 22px; background: var(--dark-2); border-radius: var(--radius);
+      border: 1px solid var(--border); display: flex; align-items: center; gap: 16px;
       transition: border-color 0.25s, transform 0.25s;
     }
-    .contact-card:hover { border-color: rgba(255,189,57,0.3); transform: translateY(-4px); }
+    .contact-card:hover { border-color: rgba(255,189,57,0.3); transform: translateX(4px); }
     .contact-icon {
-      width: 52px; height: 52px; border-radius: 14px;
+      width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
       background: rgba(255,189,57,0.1); border: 1px solid rgba(255,189,57,0.2);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 22px; margin: 0 auto 16px;
+      display: flex; align-items: center; justify-content: center; font-size: 20px;
     }
-    .contact-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
-    .contact-value { font-size: 15px; color: var(--text); font-weight: 500; }
+    .contact-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
+    .contact-value { font-size: 14px; color: var(--text); font-weight: 500; }
     .contact-value a { color: var(--text); text-decoration: none; }
     .contact-value a:hover { color: var(--accent); }
+
+    /* form card */
+    .form-card {
+      background: var(--dark-2); border-radius: var(--radius);
+      border: 1px solid var(--border); padding: 36px;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+    .form-group label { font-size: 13px; font-weight: 500; color: var(--text-dim); letter-spacing: 0.3px; }
+    .form-group input,
+    .form-group textarea {
+      background: var(--dark-3); border: 1px solid var(--border);
+      border-radius: 10px; padding: 12px 16px;
+      color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px;
+      outline: none; transition: border-color 0.2s, background 0.2s;
+      resize: none; width: 100%;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--muted); }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+      background: rgba(255,189,57,0.04);
+    }
+    .form-group input[aria-invalid="true"],
+    .form-group textarea[aria-invalid="true"] { border-color: #e24b4a; }
+    .field-error { font-size: 12px; color: #e24b4a; min-height: 16px; }
+    .form-error {
+      font-size: 13px; color: #e24b4a;
+      background: rgba(226,75,74,0.08); border: 1px solid rgba(226,75,74,0.2);
+      border-radius: 8px; padding: 10px 14px; margin-bottom: 16px;
+      display: none;
+    }
+    .form-error:not(:empty) { display: block; }
+    .btn-submit {
+      width: 100%; padding: 14px 28px;
+      background: var(--accent); color: #0e0e0e;
+      font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600;
+      border: none; border-radius: 999px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      transition: background 0.2s, transform 0.2s, opacity 0.2s;
+      letter-spacing: 0.2px;
+    }
+    .btn-submit:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .btn-icon { font-size: 18px; transition: transform 0.2s; }
+    .btn-submit:hover .btn-icon { transform: translateX(4px); }
+
+    /* success state */
+    .fs-success {
+      text-align: center; padding: 40px 20px;
+    }
+    .fs-success-icon {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: rgba(255,189,57,0.15); border: 2px solid var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; color: var(--accent); margin: 0 auto 20px;
+    }
+    .fs-success h3 {
+      font-family: 'Syne', sans-serif; font-size: 22px;
+      font-weight: 700; color: #fff; margin-bottom: 8px;
+    }
+    .fs-success p { color: var(--text-dim); font-size: 15px; }
+
+    @media (max-width: 900px) {
+      .contact-layout { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .form-card { padding: 24px; }
+    }
 
     /* ── FOOTER ── */
     footer {
@@ -422,8 +496,13 @@
   <div class="divider"></div>
   <div class="about-grid">
     <div class="about-text reveal">
-      <p>I'm a BCA 3rd year student at Maharana Pratap College Of Professional Studies — always curious about new technologies and programming languages. I give my best to everything I do.</p>
-      <p>When I'm not coding, you'll find me playing Volleyball or exploring new music. I believe great software is built with both logic and creativity.</p>
+<p>
+  I'm a passionate Full Stack Developer and a BCA graduate from Kanpur University. I enjoy building responsive, user-friendly websites and continuously learning new technologies and programming languages.
+</p>
+
+<p>
+  I’m always eager to improve my skills, explore innovative ideas, and create meaningful digital experiences. Beyond coding, I enjoy Volleyball and listening to music, which help me stay creative and motivated.
+</p>
       <div class="info-grid">
         <div class="info-item">
           <div class="info-label">Name</div>
@@ -431,7 +510,7 @@
         </div>
         <div class="info-item">
           <div class="info-label">Degree</div>
-          <div class="info-value">BCA (Pursuing)</div>
+          <div class="info-value">BCA</div>
         </div>
         <div class="info-item">
           <div class="info-label">Location</div>
@@ -443,11 +522,11 @@
         </div>
         <div class="info-item">
           <div class="info-label">Profile</div>
-          <div class="info-value">Web Developer</div>
+          <div class="info-value">Full Stack Developer</div>
         </div>
         <div class="info-item">
           <div class="info-label">Projects</div>
-          <div class="info-value">4+ Completed</div>
+          <div class="info-value">10+ Completed</div>
         </div>
       </div>
       <a href="https://www.linkedin.com/in/shivam-yadav-d9" class="btn-primary" target="_blank" style="display:inline-block;">Connect on LinkedIn ↗</a>
@@ -462,6 +541,10 @@
       </div>
       <div class="skill-row">
         <div class="skill-top"><span class="skill-name">React.js</span><span class="skill-pct">85%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="85%"></div></div>
+      </div>
+            <div class="skill-row">
+        <div class="skill-top"><span class="skill-name">React native</span><span class="skill-pct">85%</span></div>
         <div class="skill-bar"><div class="skill-fill" data-width="85%"></div></div>
       </div>
       <div class="skill-row">
@@ -491,7 +574,7 @@
   <div class="divider"></div>
   <div class="edu-grid">
     <div class="edu-card reveal">
-      <div class="edu-date">2022 – 2025 (Pursuing)</div>
+      <div class="edu-date">2022 – 2025</div>
       <div class="edu-degree">Bachelor of Computer Applications</div>
       <div class="edu-school">Maharana Pratap College Of Professional Studies</div>
     </div>
@@ -572,29 +655,82 @@
   <div class="section-label">Get in touch</div>
   <h2 class="section-title">Contact Me</h2>
   <div class="divider"></div>
-  <div class="contact-grid">
-    <div class="contact-card reveal">
-      <div class="contact-icon">📍</div>
-      <div class="contact-label">Address</div>
-      <div class="contact-value">Uttar Pradesh, India</div>
+
+  <div class="contact-layout">
+
+    <!-- Info cards -->
+    <div class="contact-info-col">
+      <div class="contact-card reveal">
+        <div class="contact-icon">📍</div>
+        <div class="contact-label">Address</div>
+        <div class="contact-value">Uttar Pradesh, India</div>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-icon">📞</div>
+        <div class="contact-label">Phone</div>
+        <div class="contact-value"><a href="tel:+919554095172">+91 9554095172</a></div>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-label">Email</div>
+        <div class="contact-value"><a href="mailto:shivammpcps@gmail.com">shivammpcps@gmail.com</a></div>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-icon">💼</div>
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-value"><a href="https://www.linkedin.com/in/shivam-yadav-d9" target="_blank">shivam-yadav-d9</a></div>
+      </div>
     </div>
-    <div class="contact-card reveal">
-      <div class="contact-icon">📞</div>
-      <div class="contact-label">Phone</div>
-      <div class="contact-value"><a href="tel:+9554095172">+91 9554095172</a></div>
+
+    <!-- Contact form -->
+    <div class="contact-form-col reveal">
+      <div class="form-card">
+        <div data-fs-success class="fs-success" style="display:none;">
+          <div class="fs-success-icon">✓</div>
+          <h3>Message sent!</h3>
+          <p>Thanks for reaching out. I'll get back to you soon.</p>
+        </div>
+
+        <form id="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" placeholder="Shivam Yadav" required data-fs-field />
+              <span data-fs-error="name" class="field-error"></span>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required data-fs-field />
+              <span data-fs-error="email" class="field-error"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" placeholder="What's this about?" required data-fs-field />
+            <span data-fs-error="subject" class="field-error"></span>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required data-fs-field></textarea>
+            <span data-fs-error="message" class="field-error"></span>
+          </div>
+          <div data-fs-error class="form-error"></div>
+          <button type="submit" data-fs-submit-btn class="btn-submit">
+            <span class="btn-text">Send Message</span>
+            <span class="btn-icon">→</span>
+          </button>
+        </form>
+      </div>
     </div>
-    <div class="contact-card reveal">
-      <div class="contact-icon">✉️</div>
-      <div class="contact-label">Email</div>
-      <div class="contact-value"><a href="mailto:shivammpcps@gmail.com">shivammpcps@gmail.com</a></div>
-    </div>
-    <div class="contact-card reveal">
-      <div class="contact-icon">💼</div>
-      <div class="contact-label">LinkedIn</div>
-      <div class="contact-value"><a href="https://www.linkedin.com/in/shivam-yadav-d9" target="_blank">shivam-yadav-d9</a></div>
-    </div>
+
   </div>
 </section>
+
+<script>
+  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+  formspree('initForm', { formElement: '#contact-form', formId: 'xqejzyyg' });
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
 <!-- FOOTER -->
 <footer>
